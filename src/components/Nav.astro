@@ -1,32 +1,35 @@
 ---
 // external imports
-import { Icon } from 'astro-icon'
+import { Icon } from "astro-icon"
 
 // local imports
 import navData from "../data/navData"
-import Link from './Link.astro';
-
+import Link from "./Link.astro"
 ---
+
 <nav aria-label="Primary">
   <div class="navbar">
     <a href="/" aria-lable="Go Home" class="logomark">
-      <Icon name="logomark" width="60"  />
+      <Icon name="logomark" width="60" />
     </a>
 
     <ul>
-      {navData.map(item =>(
-        <Link 
-        text={item.name}
-        href={item.path}
-        style="primary"
-        isFilled={false}
-        data-navlink
-       
-      />))}
+      {
+        navData.map((item) => (
+          <li>
+            <Link
+              text={item.name}
+              href={item.path}
+              style="primary"
+              isFilled={false}
+              data-navlink
+            />
+          </li>
+        ))
+      }
     </ul>
   </div>
 </nav>
-
 
 <script>
   import "../js/nav"
