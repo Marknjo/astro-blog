@@ -1,3 +1,4 @@
 {
-  "plugins": ["prettier prettier-plugin-astro"]
+  "plugins": ["prettier-plugin-astro"],
+  "semi": false
 }
