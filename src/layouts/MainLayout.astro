@@ -1,23 +1,24 @@
 ---
 // components
-import HeadLayout from "./HeadLayout.astro";
-import Footer from "../components/Footer.astro";
+import HeadLayout from "./HeadLayout.astro"
+import Footer from "../components/Footer.astro"
 
 // Styles
 import "../styles/global.css"
-import Nav from "../components/Nav.astro";
+import Nav from "../components/Nav.astro"
 
 // props
-const {title, description} = Astro.props 
-
+const { title, description } = Astro.props
 ---
 
 <html lang="en">
-	<HeadLayout {title} {description} />
-	<body>
-		<Nav />
-		<slot />
+  <HeadLayout {title} {description} />
+  <body>
+    <Nav />
 
-		<Footer />
-	</body>
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
