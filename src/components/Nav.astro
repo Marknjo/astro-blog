@@ -2,7 +2,9 @@
 // external imports
 import { Icon } from 'astro-icon'
 
-// locol imports
+// local imports
+import navData from "../data/navData"
+import Link from './Link.astro';
 
 ---
 <nav aria-label="Primary">
@@ -12,7 +14,20 @@ import { Icon } from 'astro-icon'
     </a>
 
     <ul>
-
+      {navData.map(item =>(
+        <Link 
+        text={item.name}
+        href={item.path}
+        style="primary"
+        isFilled={false}
+        data-navlink
+       
+      />))}
     </ul>
   </div>
 </nav>
+
+
+<script>
+  import "../js/nav"
+</script>
