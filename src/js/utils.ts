@@ -8,3 +8,9 @@ export function slugify(text: string) {
     .replace(/^-+/, "")
     .replace(/-+$/, "")
 }
+
+export function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("en-KE", {
+    timeZone: "UTC",
+  })
+}
