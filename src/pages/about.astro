@@ -1,11 +1,37 @@
 ---
+import { Image } from "astro:assets"
 import MainLayout from "../layouts/MainLayout.astro"
-
+import Link from "../components/Link.astro"
 
 const title = "About"
 const description = "About my blog"
 ---
 
 <MainLayout {title} {description}>
-	<h1>About Page</h1>
+  <section class="container about" aria-label="About Me">
+    <Image
+      src="/images/headshot.jpg"
+      alt="My headshot"
+      width="200"
+      height="330"
+      quality="mid"
+      loading="lazy"
+    />
+    <div class="content">
+      <h1 class="h1">Welcome to my blog</h1>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui veritatis
+        laborum, ab officia, ratione magnam quia distinctio rerum fuga natus
+        quidem. Ab excepturi dolorum quo. Earum quasi rem reprehenderit quam
+        nihil voluptatum velit vero officiis minus fugiat exercitationem,
+        corrupti ipsa.
+      </p>
+
+      <Link
+        href="mailto:marknjo@thetalkingde.com"
+        style="primary"
+        text="Contact Me"
+      />
+    </div>
+  </section>
 </MainLayout>
