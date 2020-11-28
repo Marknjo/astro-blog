@@ -1,57 +1,17 @@
 ---
-// libs imports
-import { Image } from "astro:assets"
-
 // locol imports
+import PostHeader from "../components/PostHeader.astro"
 import MainLayout from "./MainLayout.astro"
-
-import { slugify, formatDate } from "../js/utils"
 
 // props
 const { frontmatter } = Astro.props
 
 const { title, description, date, author, image, draft, category } = frontmatter
-
-/*
-
-title: Building an Astro Post Tag Component
-date: 2022-12-06
-author: Anna Dixon
-image: {
-  src: "/images/post-6.jpg",
-  alt: "A picture of a coder",
-}
-description: In this project, we’ll build out a custom Astro component for post tags.
-draft: false
-category: Astro
-
-*/
 ---
 
 <MainLayout {title} {description}>
-  <header>
-    <div class="container">
-      <small
-        ><a href={`/category/${slugify(category)}`} class="badge">{category}</a
-        ></small
-      >
+  <PostHeader {date} {author} {image} {draft} {category} />
 
-      <h1 class="h2">{title}</h1>
-      <p>
-        by <a href={`/author/${slugify(author)}`}>{author}</a> • {
-          formatDate(date)
-        }
-      </p>
-    </div>
-    <Image
-      src={image.src}
-      alt={image.alt}
-      width="1600"
-      height="600"
-      quality={80}
-      class="hero-image"
-    />
-  </header>
   <div class="post-content">
     <div class="content">
       <slot />
