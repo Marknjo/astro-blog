@@ -39,14 +39,19 @@ type TPostCol = CollectionEntry<"posts">[]
 
 export function formatBlogPosts(
   posts: TPostCol,
-  options: TBlogFormatterOPtions = {
+  options?: TBlogFormatterOPtions,
+): Array<TPost> {
+  const defaultOptions = {
     filterOutDrafts: true,
     filterOutFuturePosts: true,
     sortByDate: true,
     limit: undefined,
-  },
-): Array<TPost> {
-  const { filterOutDrafts, filterOutFuturePosts, sortByDate, limit } = options
+  }
+
+  const { filterOutDrafts, filterOutFuturePosts, sortByDate, limit } = {
+    ...defaultOptions,
+    ...options,
+  }
 
   const filteredPosts = posts.reduce((acc: TPost[], postCol) => {
     let post = postCol.data
