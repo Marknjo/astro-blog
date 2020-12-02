@@ -2,23 +2,23 @@
 import { getCollection } from "astro:content"
 import MainLayout from "../../layouts/MainLayout.astro"
 import PostCard from "../../components/PostCard.astro"
+import { formatBlogPosts } from "../../js/utils"
+import type { CollectionEntry } from "astro:content"
 
 const title = "Blog"
 const description = "All blogs"
 
 // all posts
-const allPosts = await getCollection("posts")
+const allPosts: CollectionEntry<"posts">[] = await getCollection("posts")
 
-const frontmatter = allPosts
-  .map((post) => ({ ...post.data, url: post.slug }))
-  .filter((post) => !post.draft)
+const formattedPosts = formatBlogPosts(allPosts)
 ---
 
 <MainLayout {title} {description}>
   <section class="container">
     <h1 class="h1">New Blog Posts</h1>
     <div class="post-container">
-      {frontmatter.map((post) => <PostCard tagType="h2" {post} />)}
+      {formattedPosts.map((post) => <PostCard tagType="h2" {post} />)}
     </div>
   </section>
 </MainLayout>
