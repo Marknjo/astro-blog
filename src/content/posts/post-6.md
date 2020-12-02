@@ -1,6 +1,6 @@
 ---
 title: Building an Astro Post Tag Component
-date: 2022-12-06
+date: 2023-08-06
 author: Anna Dixon
 image: { src: "/images/post-6.jpg", alt: "A picture of a coder" }
 description: In this project, we’ll build out a custom Astro component for post tags.
