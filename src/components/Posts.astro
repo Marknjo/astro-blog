@@ -1,0 +1,23 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import { formatBlogPosts, type TBlogFormatterOPtions } from "../js/utils"
+import PostCard from "./PostCard.astro"
+
+// props
+const { filterOutDrafts, filterOutFuturePosts, sortByDate, limit } =
+  Astro.props as TBlogFormatterOPtions
+
+// all posts
+const allPosts: CollectionEntry<"posts">[] = await getCollection("posts")
+
+const formattedPosts = formatBlogPosts(allPosts, {
+  ...(filterOutDrafts ? { filterOutDrafts } : {}),
+  ...(filterOutFuturePosts ? { filterOutFuturePosts } : {}),
+  ...(sortByDate ? { sortByDate } : {}),
+  ...(limit ? { limit } : {}),
+})
+---
+
+<div class="post-container">
+  {formattedPosts.map((post) => <PostCard tagType="h2" {post} />)}
+</div>
