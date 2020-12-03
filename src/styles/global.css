@@ -206,20 +206,17 @@ h1 span {
   color: hsl(var(--accent));
 }
 
-.h2,
-.content h2 {
+.h2 {
   font-size: var(--fs-xl);
   max-width: var(--content-sm);
 }
 
-.h3,
-.content h3 {
+.h3 {
   font-size: var(--fs-lg);
   max-width: var(--content-md);
 }
 
-.h4,
-.content h4 {
+.h4 {
   font-size: calc(var(--fs-md) * 0.85);
 }
 
