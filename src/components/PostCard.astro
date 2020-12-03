@@ -21,7 +21,6 @@ const { title, date, author, image, category, description, url } = post
       width="400"
       height="250"
       quality={80}
-      class="hero-image"
       style={{
         aspectRatio: "4:1",
       }}
@@ -30,7 +29,7 @@ const { title, date, author, image, category, description, url } = post
 
   <div class="content">
     <div>
-      <a href={`/blog/${url}`}><Tag class="h2">{title}</Tag></a>
+      <a href={`/blog/${url}`}><Tag class="h3">{title}</Tag></a>
       <small>
         by <a href={`/author/${slugify(author)}`}>{author}</a> • {
           formatDate(date)
