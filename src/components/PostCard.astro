@@ -30,7 +30,7 @@ const { title, date, author, image, category, description, url } = post
 
   <div class="content">
     <div>
-      <Tag class="h2">{title}</Tag>
+      <a href={`/blog/${url}`}><Tag class="h2">{title}</Tag></a>
       <small>
         by <a href={`/author/${slugify(author)}`}>{author}</a> • {
           formatDate(date)
