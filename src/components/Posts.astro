@@ -4,8 +4,13 @@ import { formatBlogPosts, type TBlogFormatterOPtions } from "../js/utils"
 import PostCard from "./PostCard.astro"
 
 // props
-const { filterOutDrafts, filterOutFuturePosts, sortByDate, limit } =
-  Astro.props as TBlogFormatterOPtions
+const {
+  filterOutDrafts,
+  filterOutFuturePosts,
+  sortByDate,
+  limit,
+  filterByCategory,
+} = Astro.props as TBlogFormatterOPtions
 
 // all posts
 const allPosts: CollectionEntry<"posts">[] = await getCollection("posts")
@@ -15,6 +20,7 @@ const formattedPosts = formatBlogPosts(allPosts, {
   ...(filterOutFuturePosts ? { filterOutFuturePosts } : {}),
   ...(sortByDate ? { sortByDate } : {}),
   ...(limit ? { limit } : {}),
+  ...(filterByCategory ? { filterByCategory } : {}),
 })
 ---
 

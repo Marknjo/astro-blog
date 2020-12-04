@@ -33,6 +33,7 @@ export type TBlogFormatterOPtions = {
   filterOutFuturePosts?: boolean
   sortByDate?: boolean
   limit?: number
+  filterByCategory?: string
 }
 
 type TPostCol = CollectionEntry<"posts">[]
@@ -46,9 +47,16 @@ export function formatBlogPosts(
     filterOutFuturePosts: true,
     sortByDate: true,
     limit: undefined,
+    filterByCategory: undefined,
   }
 
-  const { filterOutDrafts, filterOutFuturePosts, sortByDate, limit } = {
+  const {
+    filterByCategory,
+    filterOutDrafts,
+    filterOutFuturePosts,
+    sortByDate,
+    limit,
+  } = {
     ...defaultOptions,
     ...options,
   }
@@ -64,6 +72,13 @@ export function formatBlogPosts(
 
     // filter out future posts if true
     if (filterOutFuturePosts && new Date(date) > new Date()) return acc
+
+    // filter out by category
+    if (
+      filterByCategory &&
+      filterByCategory.toLocaleLowerCase() !== post.category.toLocaleLowerCase()
+    )
+      return acc
 
     // add post to acc
     acc.push(post)
