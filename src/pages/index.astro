@@ -3,9 +3,13 @@ import { Image } from "astro:assets"
 import Posts from "../components/Posts.astro"
 import MainLayout from "../layouts/MainLayout.astro"
 import Link from "../components/Link.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
 
 const title = "Astro Blog"
 const description = "My blog homepage"
+
+// all posts
+const allPosts: CollectionEntry<"posts">[] = await getCollection("posts")
 ---
 
 <MainLayout {title} {description}>
@@ -33,6 +37,6 @@ const description = "My blog homepage"
 
   <section class="container" aria-label="Latest Blog Posts">
     <h2 class="h3">Latest blog Posts</h2>
-    <Posts limit={3} />
+    <Posts {allPosts} postOptions={{ limit: 3 }} />
   </section>
 </MainLayout>

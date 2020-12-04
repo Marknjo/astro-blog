@@ -1,20 +1,25 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content"
+import { type CollectionEntry } from "astro:content"
 import { formatBlogPosts, type TBlogFormatterOPtions } from "../js/utils"
 import PostCard from "./PostCard.astro"
 
+type TProps = {
+  postOptions?: TBlogFormatterOPtions
+  allPosts: CollectionEntry<"posts">[]
+}
+
 // props
+const { allPosts, postOptions } = Astro.props as TProps
+
 const {
   filterOutDrafts,
   filterOutFuturePosts,
   sortByDate,
   limit,
   filterByCategory,
-} = Astro.props as TBlogFormatterOPtions
+} = postOptions || {}
 
-// all posts
-const allPosts: CollectionEntry<"posts">[] = await getCollection("posts")
-
+// format
 const formattedPosts = formatBlogPosts(allPosts, {
   ...(filterOutDrafts ? { filterOutDrafts } : {}),
   ...(filterOutFuturePosts ? { filterOutFuturePosts } : {}),
