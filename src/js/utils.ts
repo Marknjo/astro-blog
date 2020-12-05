@@ -34,6 +34,7 @@ export type TBlogFormatterOPtions = {
   sortByDate?: boolean
   limit?: number
   filterByCategory?: string
+  filterByAuthor?: string
 }
 
 type TPostCol = CollectionEntry<"posts">[]
@@ -48,10 +49,12 @@ export function formatBlogPosts(
     sortByDate: true,
     limit: undefined,
     filterByCategory: undefined,
+    filterByAuthor: undefined,
   }
 
   const {
     filterByCategory,
+    filterByAuthor,
     filterOutDrafts,
     filterOutFuturePosts,
     sortByDate,
@@ -80,6 +83,12 @@ export function formatBlogPosts(
     )
       return acc
 
+    // filter out by category
+    if (
+      filterByAuthor &&
+      filterByAuthor.toLocaleLowerCase() !== post.author.toLocaleLowerCase()
+    )
+      return acc
     // add post to acc
     acc.push(post)
 

@@ -17,6 +17,7 @@ const {
   sortByDate,
   limit,
   filterByCategory,
+  filterByAuthor,
 } = postOptions || {}
 
 // format
@@ -26,6 +27,7 @@ const formattedPosts = formatBlogPosts(allPosts, {
   ...(sortByDate ? { sortByDate } : {}),
   ...(limit ? { limit } : {}),
   ...(filterByCategory ? { filterByCategory } : {}),
+  ...(filterByAuthor ? { filterByAuthor } : {}),
 })
 ---
 
