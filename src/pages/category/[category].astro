@@ -1,0 +1,37 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+
+import MainLayout from "../../layouts/MainLayout.astro"
+import { slugify } from "../../js/utils"
+import Posts from "../../components/Posts.astro"
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("posts")
+
+  const entries = blogEntries.map((entry) => ({
+    params: { category: slugify(entry.data.category) },
+    props: {
+      name: entry.data.category,
+      draft: entry.data.draft,
+      date: entry.data.date,
+    },
+  }))
+
+  // ensure drafts & queued articles do not publish
+  return entries.filter(
+    (entry) =>
+      !entry.props.draft && new Date(entry.props.date).getTime() < Date.now(),
+  )
+}
+
+const { name } = Astro.props
+
+const allPosts: CollectionEntry<"posts">[] = await getCollection("posts")
+---
+
+<MainLayout title={name}>
+  <section class="container" aria-label={`Posts about ${name}`}>
+    <h1 class="h1">Posts about <span>{name}</span></h1>
+    <Posts {allPosts} postOptions={{ filterByCategory: name }} />
+  </section>
+</MainLayout>
