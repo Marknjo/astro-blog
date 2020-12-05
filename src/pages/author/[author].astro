@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from "astro"
+import { getCollection } from "astro:content"
+import { slugify } from "../../js/utils"
+import MainLayout from "../../layouts/MainLayout.astro"
+import Posts from "../../components/Posts.astro"
+
+export const getStaticPaths = (async () => {
+  const allPosts = await getCollection("posts")
+
+  const entries = allPosts.map((entry) => ({
+    props: {
+      author: entry.data.author,
+      date: entry.data.date,
+      draft: entry.data.draft,
+    },
+    params: { author: slugify(entry.data.author) },
+  }))
+
+  return entries.filter(
+    (entry) =>
+      !entry.props.draft && new Date(entry.props.date).getTime() < Date.now(),
+  )
+}) satisfies GetStaticPaths
+
+const { author } = Astro.props
+const allPosts = await getCollection("posts")
+---
+
+<MainLayout title={author}>
+  <section class="container" aria-label={`Posts by ${author}`}>
+    <h1 class="h1">All posts by <span>{author}</span></h1>
+    <Posts {allPosts} postOptions={{ filterByAuthor: author }} />
+  </section>
+</MainLayout>
