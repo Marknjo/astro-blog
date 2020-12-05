@@ -10,7 +10,12 @@ export async function getStaticPaths() {
     props: { entry },
   }))
 
-  return entries.filter((entry) => !entry.props.entry.data.draft)
+  // ensure drafts & queued articles do not publish
+  return entries.filter(
+    (entry) =>
+      !entry.props.entry.data.draft &&
+      new Date(entry.props.entry.data.date).getTime() < Date.now(),
+  )
 }
 
 const { entry } = Astro.props
