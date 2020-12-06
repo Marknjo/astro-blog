@@ -1,13 +1,26 @@
 ---
 // locol imports
+import { getCollection } from "astro:content"
 import CategoryCloud from "../components/CategoryCloud.astro"
 import PostHeader from "../components/PostHeader.astro"
+import { formatBlogPosts } from "../js/utils"
 import MainLayout from "./MainLayout.astro"
+import RelatedPosts from "../components/RelatedPosts.astro"
 
 // props
 const { frontmatter } = Astro.props
 
 const { title, description, date, author, image, draft, category } = frontmatter
+
+const allPosts = await getCollection("posts")
+const posts = formatBlogPosts(allPosts)
+const relatedPosts = posts.filter(
+  (post) =>
+    post.category.toLocaleLowerCase() === category.toLowerCase() &&
+    post.title.toLocaleLowerCase() !== title.toLowerCase(),
+)
+
+console.log(relatedPosts)
 ---
 
 <MainLayout {title} {description}>
@@ -22,6 +35,19 @@ const { title, description, date, author, image, draft, category } = frontmatter
         <h2 class="h3 center">Blog categories</h2>
         <CategoryCloud />
       </aside>
+
+      {
+        relatedPosts && (
+          <aside class="container" aria-label="Related posts">
+            <h2 class="h3 center">
+              Related post{relatedPosts.length > 0 && "s"}
+            </h2>
+            {relatedPosts.map((post) => (
+              <RelatedPosts {post} />
+            ))}
+          </aside>
+        )
+      }
     </div>
   </div>
 </MainLayout>
