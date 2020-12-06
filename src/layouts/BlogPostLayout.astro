@@ -1,5 +1,6 @@
 ---
 // locol imports
+import CategoryCloud from "../components/CategoryCloud.astro"
 import PostHeader from "../components/PostHeader.astro"
 import MainLayout from "./MainLayout.astro"
 
@@ -12,12 +13,15 @@ const { title, description, date, author, image, draft, category } = frontmatter
 <MainLayout {title} {description}>
   <PostHeader {title} {date} {author} {image} {draft} {category} />
 
-  <div class="post-content">
+  <div class="post-content" style="position: relative;">
     <div class="content">
       <slot />
     </div>
-    <div class="sidebar">
-      <p>Side bar</p>
+    <div class="sidebar sticky">
+      <aside class="container" aria-label="Blog Categories">
+        <h2 class="h3 center">Blog categories</h2>
+        <CategoryCloud />
+      </aside>
     </div>
   </div>
 </MainLayout>
