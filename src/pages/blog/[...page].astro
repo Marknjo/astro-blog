@@ -4,6 +4,7 @@ import MainLayout from "../../layouts/MainLayout.astro"
 import Posts from "../../components/Posts.astro"
 import { getCollection, type CollectionEntry } from "astro:content"
 import Pagination from "../../components/Pagination.astro"
+import CategoryCloud from "../../components/CategoryCloud.astro"
 
 const title = "Blog"
 const description = "All blogs"
@@ -30,7 +31,14 @@ const { next: nextUrl, prev: prevUrl } = page.url
 <MainLayout {title} {description}>
   <section class="container">
     <h1 class="h1">New Blog Posts</h1>
+
     <Posts allPosts={page.data} />
+
     <Pagination {nextUrl} {prevUrl} />
+
+    <aside class="container" aria-label="Blog Categories">
+      <h2 class="h3 center">Blog categories</h2>
+      <CategoryCloud showCount={true} />
+    </aside>
   </section>
 </MainLayout>
