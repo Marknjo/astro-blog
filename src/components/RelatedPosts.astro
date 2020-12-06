@@ -1,0 +1,17 @@
+---
+import { formatDate, slugify } from "../js/utils"
+
+const { post } = Astro.props
+
+const { title, date, author, url } = post
+---
+
+<article class="post">
+  <h3 class="h4">
+    <a href={`/blog/${url}`}>{title}</a>
+  </h3>
+
+  <small>
+    by <a href={`/author/${slugify(author)}`}>{author}</a> • {formatDate(date)}
+  </small>
+</article>
