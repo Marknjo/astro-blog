@@ -19,8 +19,6 @@ const relatedPosts = posts.filter(
     post.category.toLocaleLowerCase() === category.toLowerCase() &&
     post.title.toLocaleLowerCase() !== title.toLowerCase(),
 )
-
-console.log(relatedPosts)
 ---
 
 <MainLayout {title} {description}>
