@@ -1,0 +1,36 @@
+---
+import type { GetStaticPaths } from "astro"
+import MainLayout from "../../layouts/MainLayout.astro"
+import Posts from "../../components/Posts.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
+import Pagination from "../../components/Pagination.astro"
+
+const title = "Blog"
+const description = "All blogs"
+
+// all posts
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts: CollectionEntry<"posts">[] = (
+    await getCollection("posts")
+  ).filter(
+    (post) =>
+      !post.data.draft && new Date(post.data.date).getTime() < Date.now(),
+  )
+
+  return paginate(allPosts, {
+    pageSize: 3,
+  })
+}) satisfies GetStaticPaths
+
+const { page } = Astro.props
+
+const { next: nextUrl, prev: prevUrl } = page.url
+---
+
+<MainLayout {title} {description}>
+  <section class="container">
+    <h1 class="h1">New Blog Posts</h1>
+    <Posts allPosts={page.data} />
+    <Pagination {nextUrl} {prevUrl} />
+  </section>
+</MainLayout>
