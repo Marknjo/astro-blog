@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content"
+
+import { formatBlogPosts, slugify } from "../js/utils"
+
+const allPosts = await getCollection("posts")
+const formattedPosts = formatBlogPosts(allPosts)
+
+const allCategories = formattedPosts.map((cat) => cat.category.toLowerCase())
+
+const categories = Object.entries(
+  allCategories.reduce((acc, cat) => {
+    const count = acc[cat] || 0
+
+    return {
+      ...acc,
+      [cat]: count + 1,
+    }
+  }, {}),
+)
+
+const { showCount } = Astro.props
+---
+
+<ul class="categories">
+  {
+    categories.map(([cat, count]) => (
+      <li>
+        <a class="badge" href={`/category/${slugify(cat)}`}>
+          {cat} {showCount && ` (${count})`}
+        </a>
+      </li>
+    ))
+  }
+</ul>
