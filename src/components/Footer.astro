@@ -1,9 +1,26 @@
+---
+import Icon from "astro-icon"
+---
+
 <footer>
-  <small>
-    Copyright<sup>&copy;</sup> Mark NJoroge <b><span id="copyright"></span></b> | All Rights reserved
-  </small>
+  <div>
+    <small>
+      Copyright<sup>&copy;</sup> Mark NJoroge <b><span id="copyright"></span></b
+      >
+       | All Rights reserved
+    </small>
+
+    <small class="rss">
+      <a href="/rss.xml"
+        >Subscribe to RSS
+        <Icon name="tabler:rss" width="20" heigh="20" />
+      </a>
+    </small>
+  </div>
 </footer>
 
 <script>
-  document.getElementById("copyright")!.textContent = new Date().getFullYear().toString()
+  document.getElementById("copyright")!.textContent = new Date()
+    .getFullYear()
+    .toString()
 </script>

@@ -388,9 +388,14 @@ button {
 
     & a {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       gap: 5px;
       text-decoration: none;
+      line-height: 1;
+
+      & svg {
+        color: hsl(var(--accent--light));
+      }
     }
   }
 }
