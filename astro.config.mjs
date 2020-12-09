@@ -5,5 +5,5 @@ import sitemap from "@astrojs/sitemap"
 // https://astro.build/config
 export default defineConfig({
   site: "https://astro-blog.vercel.app",
-  integrations: [sitemap()],
+  integrations: [sitemap(), partytown()],
 })
