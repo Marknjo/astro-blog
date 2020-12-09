@@ -1,11 +1,21 @@
 ---
-type TProps  = {
-  title: string,
+import Seo from "../components/Seo.astro"
+import type { TPost } from "../js/utils"
+type TProps = {
+  title: string
   description?: string
+  image?: string
+  post?: TPost
+  robots?: boolean
 }
 
-const {title = "My Blog", description = "This is my dev blog"} = Astro.props as TProps
-
+const {
+  title = "My Blog",
+  description = "This is my dev blog",
+  image,
+  post,
+  robots,
+} = Astro.props as TProps
 ---
 
 <head>
@@ -13,7 +23,15 @@ const {title = "My Blog", description = "This is my dev blog"} = Astro.props as 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
-  <meta name="description" content={description}>
+  <meta name="description" content={description} />
+  <Seo {title} {description} url={Astro.url} {image} {post} {robots} />
   <title>{title}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  /><link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet"
+  />
 </head>

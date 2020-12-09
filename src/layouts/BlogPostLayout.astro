@@ -8,7 +8,7 @@ import MainLayout from "./MainLayout.astro"
 import RelatedPosts from "../components/RelatedPosts.astro"
 
 // props
-const { frontmatter } = Astro.props
+const { frontmatter, robots } = Astro.props
 
 const { title, description, date, author, image, draft, category } = frontmatter
 
@@ -21,7 +21,7 @@ const relatedPosts = posts.filter(
 )
 ---
 
-<MainLayout {title} {description}>
+<MainLayout {title} {description} {image} post={frontmatter} {robots}>
   <PostHeader {title} {date} {author} {image} {draft} {category} />
 
   <div class="post-content" style="position: relative;">
