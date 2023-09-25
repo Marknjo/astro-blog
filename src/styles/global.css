@@ -41,6 +41,7 @@ h6 {
   --txt--light: var(--_hue) 40% 5%;
   --accent--light: var(--_hue) 55% 50%;
   --muted--light: var(--_hue) 30% 99%;
+
   /* Dark Mode */
   --bkg--dark: var(--_hue) 15% 10%;
   --txt--dark: var(--_hue) 20% 85%;
@@ -139,6 +140,17 @@ h6 {
     --_shadow-saturation: 75%;
     --_shadow-lightness: 6%;
   }
+}
+
+[data-theme="dark"] {
+  --bkg: var(--bkg--dark);
+  --txt: var(--txt--dark);
+  --accent: var(--accent--dark);
+  --muted: var(--muted--dark);
+  color-scheme: dark;
+  --_shadow-strength: 0.75;
+  --_shadow-saturation: 75%;
+  --_shadow-lightness: 6%;
 }
 
 /* prefers reduced motion */
@@ -645,4 +657,29 @@ header {
   position: -webkit-sticky;
   position: sticky;
   top: 1rem;
+}
+
+.theme-btn-wrapper {
+  width: 1.4rem;
+  height: 1.4rem;
+  align-self: center;
+
+  /* w-0 h-0 hover:bg-theme-200 shadow-none border border-gray-400 */
+  & .icon-btn {
+    border: none;
+    width: 0;
+    height: 0;
+    box-shadow: none;
+    display: block;
+
+    & .icon-theme {
+      /*  w-4 h-4 text-theme-800 hidden */
+      width: 1.4rem;
+      height: 1.4rem;
+      display: block;
+    }
+    & .icon-theme--hidden {
+      display: none;
+    }
+  }
 }
