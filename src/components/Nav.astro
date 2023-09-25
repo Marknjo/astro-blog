@@ -5,6 +5,8 @@ import { Icon } from "astro-icon"
 // local imports
 import navData from "../data/navData"
 import Link from "./Link.astro"
+
+/// ph:sun-light
 ---
 
 <nav aria-label="Primary">
@@ -27,6 +29,21 @@ import Link from "./Link.astro"
           </li>
         ))
       }
+      <li class="theme-btn-wrapper">
+        <button
+          class="icon-btn"
+          data-theme-toggle
+          aria-label="toggle theme"
+          transition:persist="theme-toggle-btn"
+        >
+          <Icon
+            name="bx:bxs-sun"
+            data-icon-light
+            class="icon-theme icon-theme--hidden"
+          />
+          <Icon name="bx:bxs-moon" data-icon-dark class="icon-theme" />
+        </button>
+      </li>
     </ul>
   </div>
 </nav>
