@@ -13,10 +13,10 @@ const { title, description, image, post, robots } = Astro.props
 
 <html lang="en">
   <HeadLayout {title} {description} {image} {post} {robots} />
-  <body>
+  <body transition:animate="none">
     <Nav />
 
-    <main>
+    <main transition:animate="fade">
       <slot />
     </main>
     <Footer />
